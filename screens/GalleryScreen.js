@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchImages } from '../store/actions/actions';
 import ListItem from '../components/ListItem';
-import { FlatList } from 'react-native-gesture-handler';
+import Loader from '../components/Loader';
 
 const GalleryScreen = (props) => {
   const { fetchImages } = props;
@@ -30,13 +30,19 @@ const GalleryScreen = (props) => {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={props.imagesData}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-      />
-    </View>
+    <>
+      {props.isFetching ? (
+        <Loader />
+      ) : (
+        <View style={styles.container}>
+          <FlatList
+            data={props.imagesData}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+          />
+        </View>
+      )}
+    </>
   );
 };
 
