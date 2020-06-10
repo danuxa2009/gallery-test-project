@@ -2,9 +2,8 @@ import {
   FETCH_IMAGES_FAILURE,
   FETCH_IMAGE_REQUEST,
   FETCH_IMAGES_SUCCESS,
+  URL_API,
 } from '../constans';
-
-import API from '../../utils/API';
 
 export const fetchImageRequest = () => {
   return {
@@ -32,8 +31,9 @@ export const fetchImageFailure = (error) => {
 export const fetchImages = () => async (dispatch) => {
   dispatch(fetchImageRequest());
   try {
-    const { data } = await API.get('/');
-    dispatch(fetchImageSuccess(data));
+    const response = await fetch(URL_API);
+    const json = await response.json();
+    dispatch(fetchImageSuccess(json));
   } catch (error) {
     dispatch(fetchImageFailure(error));
   }

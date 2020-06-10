@@ -5,7 +5,7 @@ import {
 } from '../constans';
 
 const initialState = {
-  data: [],
+  imagesData: [],
   isFetching: false,
   errorMessage: '',
 };
@@ -22,7 +22,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        data: action.payload,
+        imagesData: action.payload,
       };
     }
     case FETCH_IMAGES_FAILURE: {
