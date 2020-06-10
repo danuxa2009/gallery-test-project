@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Image } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchImages } from '../store/actions/actions';
 import ListItem from '../components/ListItem';
@@ -11,10 +11,21 @@ const GalleryScreen = (props) => {
     fetchImages();
   }, []);
 
+  const goToImageScreen = (regularUrl) => {
+    const { navigate } = props.navigation;
+    return navigate('Image', { regularUrl });
+  };
+
   const keyExtractor = (item) => item.id;
   const renderItem = ({ item }) => {
     return (
-      <ListItem id={item.id} thumbnailUrl={item.urls.small} authorName={item.user.name} />
+      <ListItem
+        id={item.id}
+        regularUrl={item.urls.regular}
+        thumbnailUrl={item.urls.small}
+        authorName={item.user.name}
+        navigate={goToImageScreen}
+      />
     );
   };
 
@@ -24,15 +35,7 @@ const GalleryScreen = (props) => {
         data={props.imagesData}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
-        
       />
-      {/* {console.log(props)} */}
-
-      {/* <Text>Hello Gallery Screen</Text>
-      <Button
-        title='to the image screen'
-        onPress={() => navigation.navigate('Image')}
-      /> */}
     </View>
   );
 };

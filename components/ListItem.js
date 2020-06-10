@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { color } from 'react-native-reanimated';
 
 const ListItem = (props) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => {
+        props.navigate(props.regularUrl);
+      }}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: props.thumbnailUrl }} style={styles.image} />
-        <View style={styles.authorName}>
-          <Text>{props.authorName}</Text>
+        <View style={styles.authorDesc}>
+          <Text>Author: {props.authorName}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -21,16 +24,12 @@ const styles = StyleSheet.create({
     height: 250,
   },
   imageContainer: {
-    padding: 15,
+    padding: '5%',
   },
-  authorDesc:{
-    alignItems:"center",
-    justifyContent:'center',
-    flex:1,
-    backgroundColor: 'blue',
-    width: '100%',
-    height: 250,
-  }
+  authorDesc: {
+    paddingVertical: 5,
+    paddingLeft: 15,
+  },
 });
 
 export default ListItem;

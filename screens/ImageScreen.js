@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 
-const ImageScreen = (props) => {
+const ImageScreen = ({ route }) => {
+  const { regularUrl } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text>Hello Image Screen</Text>
+      <Image style={styles.image} source={{ uri: regularUrl }} />
     </View>
   );
 };
@@ -12,9 +14,12 @@ const ImageScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
 });
 
